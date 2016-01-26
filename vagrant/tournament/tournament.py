@@ -1,16 +1,54 @@
 #!/usr/bin/env python
 # 
-# tournament.py -- implementation of a Swiss-system tournament
 #
 
 import psycopg2
+'''
+conn=connect()
+c = conn.cursor()
+c.execute("INSERT INTO Players (content) Values (%s",(content,))
+conn.commit()
+conn.close()
+'''
+##Start from here
+Players=['Andy','Bill','Charlie','Douglas','Ernie','Franko','Gordon','Herb',
+'Irving','John','Katie','Lorne','Michael','Nancy','Oswald','Peter']
 
-
+#Already set up
 def connect():
     """Connect to the PostgreSQL database.  Returns a database connection."""
     return psycopg2.connect("dbname=tournament")
 
 
+def registerPlayer(player):
+    #Adds a player to the tournament database.
+    conn=connect()
+    c = conn.cursor()
+    #Execute insert query, substituting the post content into the query string
+    c.execute("INSERT INTO Players (Player_Name) Values (%s)",(player,))
+    #c.execute("DELETE FROM posts WHERE content = 'spam'")
+    conn.commit()
+    conn.close()
+
+def main():
+    conn=connect()
+    c=conn.cursor
+    for i in Players:
+        registerPlayer(i)
+        print i
+'''
+def reportMatch(winner, loser):
+    """Records the outcome of a single match between two players.
+
+    Args:
+      winner:  the id number of the player who won
+      loser:  the id number of the player who lost
+    """
+'''
+main()
+
+
+'''
 def deleteMatches():
     """Remove all the match records from the database."""
 
@@ -21,18 +59,6 @@ def deletePlayers():
 
 def countPlayers():
     """Returns the number of players currently registered."""
-
-
-def registerPlayer(name):
-    """Adds a player to the tournament database.
-  
-    The database assigns a unique serial id number for the player.  (This
-    should be handled by your SQL database schema, not in your Python code.)
-  
-    Args:
-      name: the player's full name (need not be unique).
-    """
-
 
 def playerStandings():
     """Returns a list of the players and their win records, sorted by wins.
@@ -73,5 +99,5 @@ def swissPairings():
         id2: the second player's unique id
         name2: the second player's name
     """
-
+'''
 
